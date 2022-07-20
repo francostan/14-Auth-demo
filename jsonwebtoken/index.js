@@ -3,19 +3,20 @@ const jwt = require("jsonwebtoken");
 const SECRET = "milanesa";
 
 function sign(data) {
-  const token = jwt.sign(data, SECRET, {
-    expiresIn: "1d",
-  });
-
-  return token;
+  return jwt.sign(data, SECRET, { expiresIn: "2h" });
 }
 
 function verify(token) {
   return jwt.verify(token, SECRET);
 }
 
-const token = sign({ user: "facu" });
+const token = sign({
+  email: "obi-wan@kenobi.com",
+  rol: "admin",
+});
+
 console.log("TOKEN", token);
 
-const valid = verify(token);
-console.log("VERIFY", valid);
+const payload = verify(token + "s");
+
+console.log("VALID", payload);

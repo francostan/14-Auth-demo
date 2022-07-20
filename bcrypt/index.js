@@ -1,15 +1,14 @@
 const bcrypt = require("bcrypt");
 
-function encryptPassword(password) {
-  bcrypt
-    .genSalt()
-    .then((salt) => {
-      console.log("SALT CREATED", salt);
-      return bcrypt.hash(password, salt);
-    })
-    .then((hash) => {
-      console.log("hash", hash);
-    });
+function encryptPassword(password, salt) {
+  bcrypt.hash(password, salt).then((hash) => {
+    console.log("HASH", hash);
+  });
 }
 
-encryptPassword("hola");
+const salt = bcrypt.genSaltSync();
+console.log("SALT", salt);
+
+encryptPassword("pochoclo9", salt);
+encryptPassword("pochoclo9", salt);
+encryptPassword("pochocle9", salt);

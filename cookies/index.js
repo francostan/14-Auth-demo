@@ -9,8 +9,8 @@ app.use(express.urlencoded({ extended: false }));
 app.get("/", (req, res) => {
   res.send(
     `<form method="POST" action="cookies">
-      <input name="name" placeholder="name"/>
-      <input name="cookie" placeholder="value"/>
+      <input name="name" placeholder="cookie name"/>
+      <input name="cookie" placeholder="cookie value"/>
       <button>Submit</button>
     </form>`
   );
@@ -18,18 +18,18 @@ app.get("/", (req, res) => {
 
 app.get("/cookies", (req, res) => {
   const cookies = req.cookies;
-  console.log("COOKIE", cookies);
 
-  res.send(cookies);
+  console.log("COOKIES", req.cookies);
+
+  res.send(cookies.token);
 });
 
 app.post("/cookies", (req, res) => {
-  const { cookie, name } = req.body;
-  console.log("COOKIE", cookie);
+  const { name, cookie } = req.body;
 
   res.cookie(name, cookie);
 
-  res.redirect("/cookies");
+  res.sendStatus(201);
 });
 
 app.listen(3000, () => console.log("Server running"));
