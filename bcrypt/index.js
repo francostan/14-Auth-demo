@@ -2,7 +2,7 @@ const bcrypt = require("bcrypt");
 
 function encryptPassword(password, salt) {
   bcrypt.hash(password, salt).then((hash) => {
-    console.log("HASH", hash);
+    console.log("HASH probado fork", hash);
   });
 }
 
